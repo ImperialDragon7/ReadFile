@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 import java.util.Scanner;
 public class ReadFile {
 	public static void main(String[] args) {
@@ -8,6 +9,33 @@ public class ReadFile {
 		}
 		printMenu();
 		
+		Scanner keyboard = new Scanner(System.in);
+		String command = keyboard.nextLine();
+			switch (command.toLowerCase()) {
+				case "highest":
+					System.out.println("highest");
+					findHighestYearIndex(rainfall);
+					System.out.println(Arrays.toString(rainfall));
+					break;
+				case "lowest":
+					System.out.println("lowest");
+					findLowestYearIndex(rainfall);
+					System.out.println(Arrays.toString(rainfall));
+					break;
+				case "average":
+					System.out.println("average");
+					findAverage(rainfall);
+					System.out.println(Arrays.toString(rainfall));
+					break;
+				case "quit":
+					break;
+				default:
+					System.out.println("Error: Please try again");
+					printMenu();
+			}		
+		
+		System.out.println("End of Program");
+		keyboard.close();
 				
 		}
 
@@ -42,36 +70,10 @@ public class ReadFile {
 		System.out.println("What about the rainfall from 1849 to 2016 would you like to know?");
 		System.out.println("Options are: highest, lowest, average and quit.");
 		System.out.println("Please enter the option you desire");
-		Scanner keyboard = new Scanner(System.in);
-		String command = keyboard.nextLine();
-		int y = 0;
-		while(y < 1) {
-			switch (command.toLowerCase()) {
-				case "highest":
-					System.out.println("highest");
-					findHighestYearIndex(rainfall[]);
-					break;
-				case "lowest":
-					System.out.println("lowest");
-					findLowestYearIndex(rainfall[]);
-					break;
-				case "average":
-					System.out.println("average");
-					findAverage(rainfall[]);
-					break;
-				case "quit":
-					y++;
-					break;
-				default:
-					System.out.println("Error: Please try again");
-					printMenu();
-			}		
-		}
-		System.out.println("End of Program");
 	}
-	public static double findHighestYearIndex(Double[] array) {
+	public static double findHighestYearIndex(double[] array) {
 		int index = 0;
-		int highest = array[index];
+		double highest = 0.0;
 		while(index < array.length) {
 			if(array[index] > highest) {
 				highest = array[index];
@@ -81,9 +83,9 @@ public class ReadFile {
 		return highest;
 	}
 	
-	public static double findLowestYearIndex(Double[] array) {
+	public static double findLowestYearIndex(double[] array) {
 		int index = 0;
-		int lowest = array[index];
+		double lowest = array[index];
 		while(index < array.length) {
 			if(array[index] < lowest) {
 				lowest = array[index];
@@ -93,9 +95,10 @@ public class ReadFile {
 		return lowest;
 	}
 
-	public static double findAverage(Double[] array) {
+	public static double findAverage(double[] array) {
+		double average = 0.0;
 			for(int i = 0; i < array.length; i++) {
-				double average = average + array[i];
+				average = average + array[i];
 			}
 			average = average / 168;
 			return average;
